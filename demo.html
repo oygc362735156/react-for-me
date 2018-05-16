@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function add(a) {
+        function add2(b) {
+            a = a + b;
+            return add2;
+        }
+        add2.toString = function(){return a;};
+        return add2;
+    }
+
+    console.log(add(1)(2)(3)(4));
+</script>
+</body>
+</html>

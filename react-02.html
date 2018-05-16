@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        .test{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+    let ClickMessage = React.createClass({
+        handleClick: function (e) {
+            let tip = ReactDOM.findDOMNode(this.refs.tip);
+            tip.style.display = tip.style.display === "none"? "inline-block":"none";
+            e.stopPropagation();
+            e.preventDefault();
+        },
+        render: function () {
+            return <div>
+                <button onClick={this.handleClick}>显示|隐藏</button>
+                <span ref="tip">显示的数据</span>
+            </div>
+        }
+    });
+    let ChangeMessage = React.createClass({
+        getInitialState: function () {
+            return {
+                inputMessage: ""
+            }
+        },
+        handleChange:function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            console.log(this);
+            this.setState({
+               inputMessage:e.target.value
+            })
+        },
+        render: function () {
+            return <div>
+                <input type="text" onChange={this.handleChange}/><span>{this.state.inputMessage}</span>
+            </div>
+        },
+    });
+    ReactDOM.render(
+        <div>
+            <ClickMessage/>
+            <ChangeMessage/>
+        </div>,
+        document.getElementById("app")
+    )
+</script>
+</body>
+</html>

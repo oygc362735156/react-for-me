@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        /*.order{*/
+        /*color: blue;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    //首字母必须大写
+    let OrderMessage = React.createClass({
+        getInitialState: function () {
+            return {
+                opacity: 1.0,
+                color: 'red',
+                fontSize:"17px"
+            }
+        },
+        render: function () {
+            let styleObj = {
+                color: this.state.color,
+                fontSize: this.state.fontSize,
+                opacity:this.state.opacity
+            };
+            return <div style={styleObj} id="order">你好{this.props.name}</div>
+        },
+        componentWillMount: function () {
+            // console.log(this.state);
+        },
+        componentDidMount: function () {
+            let sumN =0;
+            let fontSize = document.getElementById('order').style.width;
+            setInterval(function () {
+                let opacity = this.state.opacity;
+                sumN +=2 ;
+                fontSize = sumN+"px";
+                opacity -=0.02;
+                this.setState({
+                    opacity: opacity,
+                    fontSize:fontSize
+                });
+            }.bind(this), 200)
+        }
+    });
+    ReactDOM.render(
+        <OrderMessage name="欧阳"/>,
+        document.getElementById("example")
+    );
+
+</script>
+</body>
+</html>
